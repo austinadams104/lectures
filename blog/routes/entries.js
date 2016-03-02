@@ -11,20 +11,24 @@ router.get('/', function(req, res, next) {
   res.render('entries/index', { title: 'Blog', entries: entries });
 });
 
+/* GET /entries/0 */
+router.get('/:id', function(req, res, next) {
+  res.render('entries/entry', {title: "a entry", entry: entries[req.params.id]});
+});
+
 /* /entries/new */
 router.get('/new', function(req, res, next) {
   res.render('entries/new', {title: "Create new entry"});
 });
 
-/* /entries/new */
+/* /entries/create */
 router.post('/create', function(req, res, next) {
-  console.log(req.body);
   entries.push(req.body);
-  console.log(entries);
   res.render('entries/index', { title: 'Blog', entries: entries });
 });
 
-router.get('/update/:id', function(req, res, next) {
+/* /entries/1/edit */
+router.get('/:id/edit', function(req, res, next) {
   res.render('entries/update',
   {
     title: 'Update an entry',
@@ -33,7 +37,8 @@ router.get('/update/:id', function(req, res, next) {
   });
 });
 
-router.post('/update/:id', function(req, res, next) {
+/* POST /entries/1 */
+router.post('/:id', function(req, res, next) {
   // entries.push(req.body);
   entries[req.params.id] = req.body;
   res.render('entries/index',
@@ -43,18 +48,11 @@ router.post('/update/:id', function(req, res, next) {
   });
 });
 
-/* GET entris listing. */
-router.get('/', function(req, res, next) {
-  res.render('entries/index_delete', { title: 'Blog', entries: entries });
+/* GET /entries/1/delete  */
+router.get('/:id/delete', function(req, res, next) {
+  var id = req.params.id
+  entries = entries.slice(0,id).concat(entries.slice(id+1, entries.length));
+  res.render('entries/index', { title: 'Blog', entries: entries });
 });
-
-
-
-/* /entries/0 */
-router.get('/:id', function(req, res, next) {
-  res.render('entries/entry', {title: "a entry", entry: entries[req.params.id]});
-});
-
-
 
 module.exports = router;
