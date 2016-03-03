@@ -6,23 +6,23 @@ var entries = [
   {slug:"how to fail class", body: "play video games all day", created_at: "some date"}
 ];
 
-/* GET entris listing. */
+/* READ all: GET entries listing. */
 router.get('/', function(req, res, next) {
   res.render('entries/index', { title: 'Blog', entries: entries });
 });
 
-/* /entries/new */
+/* CREATE entry form: GET /entries/new */
 router.get('/new', function(req, res, next) {
   res.render('entries/new', {title: "Create new entry"});
 });
 
-/* /entries/create */
-router.post('/create', function(req, res, next) {
+/*CREATE entry: POST /entries/ */
+router.post('/', function(req, res, next) {
   entries.push(req.body);
   res.render('entries/index', { title: 'Blog', entries: entries });
 });
 
-/* /entries/1/edit */
+/* UPDATE entry form: GET /entries/1/edit */
 router.get('/:id/edit', function(req, res, next) {
   res.render('entries/update',
   {
@@ -32,9 +32,8 @@ router.get('/:id/edit', function(req, res, next) {
   });
 });
 
-/* POST /entries/1 */
+/* UPDATE entry: POST /entries/1 */
 router.post('/:id', function(req, res, next) {
-  // entries.push(req.body);
   entries[req.params.id] = req.body;
   res.render('entries/index',
   {
@@ -43,7 +42,7 @@ router.post('/:id', function(req, res, next) {
   });
 });
 
-/* GET /entries/1/delete  */
+/* DELETE entry: GET /entries/1/delete  */
 router.get('/:id/delete', function(req, res, next) {
   var id = req.params.id
   entries = entries.slice(0,id).concat(entries.slice(id+1, entries.length));
