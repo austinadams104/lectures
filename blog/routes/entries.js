@@ -11,11 +11,6 @@ router.get('/', function(req, res, next) {
   res.render('entries/index', { title: 'Blog', entries: entries });
 });
 
-/* GET /entries/0 */
-router.get('/:id', function(req, res, next) {
-  res.render('entries/entry', {title: "a entry", entry: entries[req.params.id]});
-});
-
 /* /entries/new */
 router.get('/new', function(req, res, next) {
   res.render('entries/new', {title: "Create new entry"});
@@ -53,6 +48,12 @@ router.get('/:id/delete', function(req, res, next) {
   var id = req.params.id
   entries = entries.slice(0,id).concat(entries.slice(id+1, entries.length));
   res.render('entries/index', { title: 'Blog', entries: entries });
+});
+
+/* THIS NEEDS TO BE LAST or /new goes here rather than where it should */
+/* READ one entry: GET /entries/0 */
+router.get('/:id', function(req, res, next) {
+  res.render('entries/entry', {title: "a entry", entry: entries[req.params.id]});
 });
 
 module.exports = router;
