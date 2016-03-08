@@ -3,7 +3,7 @@ var router = express.Router();
 
 var entries = [
   {slug:"Please work...", body: "here is a cookie", created_at: "some date"},
-  {slug:"CLICK HERE", body: "who is the bigger fool? The fool? or the fool that follows him?", created_at: "some date"}
+  {slug:"CLICK HERE", body: "who is the bigger fool? The fool? or the fool that follows him?", created_at: "some date"},
   {slug:"Chinese Cowboy", body: "Howdee Patna!", created_at: "some date"}
 ];
 
